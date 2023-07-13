@@ -13,7 +13,7 @@ struct MemorizeCardApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ListFlashcardView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
