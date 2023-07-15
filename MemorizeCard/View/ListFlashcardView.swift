@@ -18,19 +18,21 @@ struct ListFlashcardView: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                VStack {
                     List {
                     ForEach(mainViewModel.allFlashcardSets, id: \.flashcardSetName) { cardSet in
                         NavigationLink(destination: FlashcardView(set: cardSet, mainViewModel: mainViewModel)) {
                             Text(cardSet.flashcardSetName)
                                 .font(.headline)
-                            }
                         }
+                    }
                     .onDelete(perform: mainViewModel.deleteCardSet)
                     
                 }
-                    .listStyle(InsetGroupedListStyle())
-                    .navigationTitle("My Flashcards")
-                    .foregroundColor(Color("Dark Slate Gray"))
+                .listStyle(InsetGroupedListStyle())
+                .navigationTitle("My Flashcards")
+                .foregroundColor(Color("Dark Slate Gray"))
+            }
             // FloatingButton
                 VStack {
                     Spacer()
@@ -45,7 +47,7 @@ struct ListFlashcardView: View {
                 mainViewModel.loadCardSets()
             }
             }
-        .navigationBarBackButtonHidden(true)
+//        .navigationBarBackButtonHidden(true)
         }
     }
 
@@ -77,7 +79,7 @@ struct FloatingButton: View {
             }) {
                 Image(systemName: "plus").resizable().frame(width: 30, height: 30).padding(15)
             }
-            .background(Color("Cadet Green"))
+            .background(Color("Color 2"))
             .foregroundColor(Color("Light Steel Blue"))
             .clipShape(Circle())
             .rotationEffect(.init(degrees: self.show ? 180 : 0))
@@ -100,7 +102,6 @@ struct FloatingButton: View {
                 .padding()
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
-                .background(.orange).ignoresSafeArea()
             }
         }
         .padding(30)

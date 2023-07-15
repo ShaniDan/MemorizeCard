@@ -12,14 +12,14 @@ struct FlashcardView: View {
     @State var currentIndex: Int = 0
     @State var set: FlashcardSet
     @State private var isShowingUpdateView = false
-    @StateObject var mainViewModel: CardViewModel = CardViewModel()
+    @ObservedObject var mainViewModel: CardViewModel
     // Gesture properties
     @State private var offset = CGSize.zero
     @State private var targetOffset = CGSize.zero
     
     init(set: FlashcardSet, mainViewModel: CardViewModel) {
         _set = State(initialValue: set)
-        //        self.mainViewModel = mainViewModel
+                self.mainViewModel = mainViewModel
     }
     
     // MARK: - Computed properties
@@ -41,7 +41,7 @@ struct FlashcardView: View {
                 .font(.title)
             ZStack {
                 Rectangle()
-                    .fill(flipped ? Color("Gray") : Color("Cadet Blue"))
+                    .fill(flipped ? Color("Color 2") : Color("Color 1"))
                     .frame(width: 350, height: 300)
                     .cornerRadius(15)
                     .rotation3DEffect(.degrees(flipped ? 180 : 0), axis: (x: 0.0, y: 1.0, z: 0.0))
@@ -53,6 +53,8 @@ struct FlashcardView: View {
                 VStack {
                     if let card = currentCard {
                         Text(flipped ? card.answer : card.question)
+                            .foregroundColor(.white)
+                            .bold()
                     } else {
                         Text("No cards")
                     }
@@ -79,7 +81,7 @@ struct FlashcardView: View {
                     NavigationLink(destination: AddCardView(set: set, mainViewModel: mainViewModel), label: {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(width: 330, height: 55)
-                            .foregroundColor(Color("Dark Slate Gray"))
+                            .foregroundColor(Color("Color 2"))
                             .overlay(
                                 Text("Add Card")
                                     .foregroundColor(.white)

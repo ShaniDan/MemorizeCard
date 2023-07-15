@@ -25,22 +25,6 @@ struct AddCardView: View {
             VStack {
                 HStack {
                     Text(set.flashcardSetName)
-//                    Text("Choose a set")
-//                        .padding(.leading)
-//                        .font(.headline)
-//                    Spacer()
-//                    Picker("Choose Set", selection: $selection) {
-//                        ForEach(mainViewModel.allFlashcardSets, id: \.flashcardSetName) { set in
-//                            Text(set.flashcardSetName).tag(set)
-//                        }
-//                    }
-//                    .pickerStyle(.automatic)
-//                    .padding(.trailing, 8)
-//                    .frame(alignment: .trailing)
-//                    .background(Rectangle()).cornerRadius(8).foregroundColor(Color(.systemGray5))
-//                    .onChange(of: selection) { newValue in
-//                        currentSet = newValue.id
-//                    }
                 }
                 .padding(.trailing, 8)
                 .toolbar {

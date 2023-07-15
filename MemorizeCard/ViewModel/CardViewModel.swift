@@ -98,6 +98,4 @@ class CardViewModel: ObservableObject {
     }
 }
 
-//class FlashcardManager: ObservableObject {
-//    @Published var allFlashcardSets: [FlashcardSet] = []
-//}
+
