@@ -12,12 +12,13 @@ struct AddCardView: View {
     @State public var text2: String = ""
     @State public var textField: String = ""
     @State var currentSet: UUID?
-    @State var set: FlashcardSet
+    @Binding var set: FlashcardSet
     @State var selection = FlashcardSet(flashcardSetName: "")
     @ObservedObject var mainViewModel: CardViewModel
     
-    init(set: FlashcardSet, mainViewModel: CardViewModel) {
-        _set = State(initialValue: set)
+    init(set: Binding<FlashcardSet>, mainViewModel: CardViewModel) {
+        _set = set
+//        _set = State(initialValue: set)
         self.mainViewModel = mainViewModel
     }
     
@@ -69,7 +70,8 @@ struct AddCardView: View {
 }
 
 struct AddCardView_Previews: PreviewProvider {
+    @State static var flashcardSet = FlashcardSet(flashcardSetName: "Test")
     static var previews: some View {
-        AddCardView(set: FlashcardSet(flashcardSetName: "Test"), mainViewModel: CardViewModel())
+        AddCardView(set: $flashcardSet, mainViewModel: CardViewModel())
     }
 }

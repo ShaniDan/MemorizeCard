@@ -18,21 +18,23 @@ struct ListFlashcardView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                VStack {
-                    List {
-                    ForEach(mainViewModel.allFlashcardSets, id: \.flashcardSetName) { cardSet in
-                        NavigationLink(destination: FlashcardView(set: cardSet, mainViewModel: mainViewModel)) {
-                            Text(cardSet.flashcardSetName)
-                                .font(.headline)
+                if mainViewModel.cardSets.isEmpty {
+                    Text("Add Flashcard Set")
+                } else {
+                    VStack {
+                        List {
+                            ForEach(mainViewModel.allFlashcardSets, id: \.flashcardSetName) { cardSet in
+                                NavigationLink(destination: FlashcardView(set: cardSet, mainViewModel: mainViewModel)) {
+                                    Text(cardSet.flashcardSetName)
+                                        .font(.headline)
+                                }
+                            }
+                            .onDelete(perform: mainViewModel.deleteCardSet)
+                            
                         }
+                        .listStyle(InsetGroupedListStyle())
                     }
-                    .onDelete(perform: mainViewModel.deleteCardSet)
-                    
                 }
-                .listStyle(InsetGroupedListStyle())
-                .navigationTitle("My Flashcards")
-                .foregroundColor(Color("Dark Slate Gray"))
-            }
             // FloatingButton
                 VStack {
                     Spacer()
@@ -43,6 +45,8 @@ struct ListFlashcardView: View {
                 }
                 .padding()
                }
+            .navigationTitle("My Flashcards")
+            .foregroundColor(Color("Dark Slate Gray"))
             .onAppear {
                 mainViewModel.loadCardSets()
             }
