@@ -51,6 +51,12 @@ class CardViewModel: ObservableObject {
         print("New card added to card set: \(card)")
     }
     
+    // MARK: Read functions
+    func set(id: UUID) -> FlashcardSet? {
+        cardSets.first(where: { $0.id == id })
+    }
+    
+    
     // MARK: Update function
 
     func updateCardSet(cardSetID: UUID, newName: String) -> UUID? {

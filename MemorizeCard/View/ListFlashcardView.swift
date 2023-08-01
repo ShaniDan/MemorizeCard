@@ -19,7 +19,17 @@ struct ListFlashcardView: View {
         NavigationStack {
             ZStack {
                 if mainViewModel.cardSets.isEmpty {
-                    Text("Add Flashcard Set")
+                    VStack {
+                        Image(systemName: "rectangle.and.paperclip")
+                            .resizable()
+                            .frame(width: 150, height: 130)
+//                            .foregroundColor(Color("Color 2"))
+                            .padding()
+                        Text("Flashcard sets you add appear here")
+                            .font(.title3)
+                            .foregroundColor(Color("Dark Slate Gray"))
+                            .bold()
+                    }
                 } else {
                     VStack {
                         List {

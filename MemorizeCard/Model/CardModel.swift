@@ -18,6 +18,4 @@ struct FlashcardSet : Codable, Identifiable, Hashable {
     var id = UUID()
     var flashcardSetName : String
     var flashCards : [CardModel] = []
-    
-    
 }

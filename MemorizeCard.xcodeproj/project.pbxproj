@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		252918732A6B7A7C0020182D /* GridFlashcards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252918722A6B7A7C0020182D /* GridFlashcards.swift */; };
 		25DD29322A4CE999007F5BD0 /* MemorizeCardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DD29312A4CE999007F5BD0 /* MemorizeCardApp.swift */; };
 		25DD29362A4CE99A007F5BD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25DD29352A4CE99A007F5BD0 /* Assets.xcassets */; };
 		25DD29392A4CE99A007F5BD0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25DD29382A4CE99A007F5BD0 /* Preview Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		252918722A6B7A7C0020182D /* GridFlashcards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridFlashcards.swift; sourceTree = "<group>"; };
 		25DD292E2A4CE999007F5BD0 /* MemorizeCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemorizeCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25DD29312A4CE999007F5BD0 /* MemorizeCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeCardApp.swift; sourceTree = "<group>"; };
 		25DD29352A4CE99A007F5BD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				25DD294F2A4CEAE1007F5BD0 /* FlashcardView.swift */,
 				25DD29512A4CEAFB007F5BD0 /* EditFlashcardView.swift */,
 				25DD294B2A4CEA94007F5BD0 /* AddCardView.swift */,
+				252918722A6B7A7C0020182D /* GridFlashcards.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				25DD294A2A4CEA69007F5BD0 /* NewSetView.swift in Sources */,
 				25DD29322A4CE999007F5BD0 /* MemorizeCardApp.swift in Sources */,
 				25DD29522A4CEAFB007F5BD0 /* EditFlashcardView.swift in Sources */,
+				252918732A6B7A7C0020182D /* GridFlashcards.swift in Sources */,
 				25DD293E2A4CE99A007F5BD0 /* MemorizeCard.xcdatamodeld in Sources */,
 				25DD29482A4CEA0E007F5BD0 /* CardModel.swift in Sources */,
 				25DD29502A4CEAE1007F5BD0 /* FlashcardView.swift in Sources */,

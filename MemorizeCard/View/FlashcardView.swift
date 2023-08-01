@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FlashcardView: View {
     @State var flipped = false
-    @State var currentIndex: Int = 0
     @State var set: FlashcardSet
     @State private var isShowingUpdateView = false
     @ObservedObject var mainViewModel: CardViewModel
@@ -23,60 +22,41 @@ struct FlashcardView: View {
     
     // MARK: - Computed properties
     
-    var currentCard: CardModel? {
-        if currentIndex < set.flashCards.count {
-            return set.flashCards[currentIndex]
-        } else {
-            return nil
-        }
-    }
-    
     var body: some View {
-        NavigationStack {
+//        NavigationStack {
             VStack {
                 Text(set.flashcardSetName)
                     .foregroundColor(Color("Dark Slate Gray"))
                     .bold()
                     .font(.title)
-                ZStack {
-                    Rectangle()
-                        .fill(flipped ? Color("Color 2") : Color("Color 1"))
-                        .frame(width: 350, height: 300)
-                        .cornerRadius(15)
-                        .rotation3DEffect(.degrees(flipped ? 180 : 0), axis: (x: 0.0, y: 1.0, z: 0.0))
-                        .onTapGesture {
-                            withAnimation { self.flipped.toggle()
+                    .padding()
+                    VStack { ScrollView(.horizontal) {
+                        LazyHGrid(rows: [GridItem(.flexible())]) {
+                            ForEach(set.flashCards, id: \.id) { flashcard in
+                                ZStack {
+                                    Rectangle()
+                                        .fill(flipped ? Color("Color 2") : Color("Color 1"))
+                                        .frame(width: 350, height: 300)
+                                        .cornerRadius(15)
+                                        .rotation3DEffect(.degrees(flipped ? 180 : 0), axis: (x: 0.0, y: 1.0, z: 0.0))
+                                        .onTapGesture {
+                                            withAnimation { self.flipped.toggle()
+                                            }
+                                        }
+                                    Text(flipped ? flashcard.answer : flashcard.question)
+                                        .foregroundColor(.white)
+                                        .bold()
+                                        .rotation3DEffect(.degrees(flipped ? 180 : 0), axis: (x: 0.0, y: 0.0, z: 0.0)
+                                        )
+                                        .frame(width: 330, height: 280)
+                                }
+                                .padding()
                             }
-                        }
-                    
-                    VStack {
-                        if let card = currentCard {
-                            Text(flipped ? card.answer : card.question)
-                                .foregroundColor(.white)
-                                .bold()
-                        } else {
-                            Text("No cards")
                         }
                     }
-                    .padding()
-                    .rotation3DEffect(.degrees(flipped ? 180 : 0), axis: (x: 0.0, y: 0.0, z: 0.0)
-                    )
-                    .frame(width: 330, height: 280)
-                }
-                .offset(x: offset.width)
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            offset = value.translation
-                        }.onEnded { value in
-                            withAnimation {
-                                swipeCard(width: value.translation.width)
-                                offset = .zero
-                            }
-                        }
-                )
-                HStack() {
-                    VStack() {
+                    }
+                    .frame(width: 370, height: 400)
+                 Spacer()
                         NavigationLink(destination: AddCardView(set: $set, mainViewModel: mainViewModel), label: {
                             RoundedRectangle(cornerRadius: 10)
                                 .frame(width: 330, height: 55)
@@ -87,9 +67,9 @@ struct FlashcardView: View {
                                         .bold()
                                 )
                         })
-                    }
-                }
-                .padding(50)
+                        NavigationLink(destination: GridFlashcards(set: set, mainViewModel: mainViewModel), label: {
+                            Text("Grid")
+                        })
             }
             .onAppear {
                 mainViewModel.loadCardSets()
@@ -97,28 +77,13 @@ struct FlashcardView: View {
             .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement
                     .navigationBarTrailing) {
-                        NavigationLink(destination: EditFlashcardView(set: set, mainViewModel: mainViewModel)) {
+                        NavigationLink(destination: EditFlashcardView(set: $set, mainViewModel: mainViewModel)) {
                             Text("Edit")
                         }
                     }
             }
-        }
     }
-        private func swipeCard(width: CGFloat) {
-            let dragThreshold: CGFloat = 150
-            
-            if width < -dragThreshold {
-                if currentIndex < set.flashCards.count - 1 {
-                    currentIndex += 1
-                    targetOffset = CGSize(width: -300, height: 0)
-                }
-            } else if width > dragThreshold {
-                if currentIndex > 0 {
-                    currentIndex -= 1
-                    targetOffset = CGSize(width: 300, height: 0)
-                }
-            }
-        }
+
     }
 
 struct FlashcardView_Previews: PreviewProvider {

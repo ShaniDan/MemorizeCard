@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct EditFlashcardView: View {
-    @State var set: FlashcardSet
+    @Binding var set: FlashcardSet
     @ObservedObject var mainViewModel: CardViewModel
     
-    init(set: FlashcardSet, mainViewModel: CardViewModel) {
-        _set = State(initialValue: set)
+    init(set: Binding<FlashcardSet>, mainViewModel: CardViewModel) {
+//        _set = State(initialValue: set)
+        _set = set
         self.mainViewModel = mainViewModel
     }
     
@@ -59,8 +60,11 @@ struct EditFlashcardView: View {
 }
 
 struct EditFlashcardView_Previews: PreviewProvider {
+    // Create a preview instance of FlashcardSet
+    @State static var previewSet = FlashcardSet(flashcardSetName: "Sample Set", flashCards: [
+    ])
+    
     static var previews: some View {
-        EditFlashcardView(set: FlashcardSet(flashcardSetName: "Test"), mainViewModel: CardViewModel())
+        EditFlashcardView(set: $previewSet, mainViewModel: CardViewModel())
     }
 }
-

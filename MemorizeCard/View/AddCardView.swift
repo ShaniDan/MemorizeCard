@@ -33,7 +33,9 @@ struct AddCardView: View {
                         .navigationBarTrailing) {
                             Button {
                                 // MARK: Need to add the card to the saved title name
-                                mainViewModel.add(card: CardModel(question: text1, answer: text2), to: set.id)
+                                let cardModel = CardModel(question: text1, answer: text2)
+                                mainViewModel.add(card: cardModel, to: set.id)
+                                set.flashCards.append(cardModel)
                                 text1 = ""
                                 text2 = ""
                             } label: {
@@ -70,8 +72,10 @@ struct AddCardView: View {
 }
 
 struct AddCardView_Previews: PreviewProvider {
-    @State static var flashcardSet = FlashcardSet(flashcardSetName: "Test")
+    @State static var previewSet = FlashcardSet(flashcardSetName: "Sample Set", flashCards: [])
+    
     static var previews: some View {
-        AddCardView(set: $flashcardSet, mainViewModel: CardViewModel())
+        AddCardView(set: $previewSet, mainViewModel: CardViewModel())
+
     }
 }
